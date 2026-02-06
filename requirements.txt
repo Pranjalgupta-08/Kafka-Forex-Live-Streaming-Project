@@ -1,0 +1,7 @@
+streamlit
+confluent-kafka
+boto3
+python-dotenv
+pyarrow
+pandas
+
