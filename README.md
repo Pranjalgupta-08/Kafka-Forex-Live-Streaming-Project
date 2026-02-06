@@ -23,3 +23,8 @@ AlphaVantage → Kafka Producer → Kafka Consumer → S3 → Spark (Bronze/Silv
 ## Tech Stack
 
 Python, Kafka, AWS S3, Spark, Streamlit
+
+
+## Dashboard Preview
+
+![Forex Dashboard](images/dashboard.png)

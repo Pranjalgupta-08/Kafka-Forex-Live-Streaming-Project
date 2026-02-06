@@ -4,6 +4,13 @@ import plotly.express as px
 import boto3
 from io import BytesIO
 import time
+import os
+from dotenv import load_dotenv
+
+# =========================
+# LOAD ENV
+# =========================
+load_dotenv(".env")
 
 # =========================
 # CONFIG
@@ -13,6 +20,9 @@ PREFIX = "custom-consumer/FOREX_PRANJAL/"
 REFRESH_SECONDS = 30
 AWS_REGION = "us-east-2"
 
+AWS_ACCESS_KEY_ID = os.getenv("AWS_ACCESS_KEY_ID")
+AWS_SECRET_ACCESS_KEY = os.getenv("AWS_SECRET_ACCESS_KEY")
+
 st.set_page_config(
     page_title="Forex Dashboard",
     layout="wide"
@@ -20,8 +30,15 @@ st.set_page_config(
 
 st.caption("Kafka → S3 → Spark → Delta → Streamlit")
 
-# S3 Client
-s3 = boto3.client("s3", region_name=AWS_REGION)
+# =========================
+# S3 Client (EXPLICIT CREDS)
+# =========================
+s3 = boto3.client(
+    "s3",
+    aws_access_key_id=AWS_ACCESS_KEY_ID,
+    aws_secret_access_key=AWS_SECRET_ACCESS_KEY,
+    region_name=AWS_REGION
+)
 
 # =========================
 # LOAD GOLD DATA
@@ -67,7 +84,6 @@ df = load_gold()
 if df.empty:
     st.warning("No data found in gold layer")
     st.stop()
-
 
 # =========================
 # Currency Selector
