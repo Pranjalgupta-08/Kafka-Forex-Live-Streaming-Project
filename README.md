@@ -28,3 +28,5 @@ Python, Kafka, AWS S3, Spark, Streamlit
 ## Dashboard Preview
 
 ![Forex Dashboard](images/dashboard.png)
+
+![Forex Dashboard](images/dashboard1.png)
